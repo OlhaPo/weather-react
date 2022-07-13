@@ -1,0 +1,73 @@
+.WeatherSearch {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.WeatherSearch .search-input {
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid #2c2d34;
+  background-color: rgb(255, 247, 220, 0.58);
+}
+
+.WeatherSearch .submit-button {
+  border-radius: 10px;
+  border: 1px solid #2c2d34;
+  background-color: rgb(255, 247, 220, 0.58);
+  color: #70757a;
+  padding: 7px;
+}
+
+.WeatherSearch ul {
+  margin: 50px 0;
+  padding: 0;
+  text-align: left;
+}
+
+.WeatherSearch li {
+  font-size: 22px;
+  color: #333333;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.WeatherSearch li:first-letter {
+  text-transform: capitalize;
+}
+
+.WeatherSearch .current-weather img {
+  width: 120px;
+  height: 120px;
+}
+
+.WeatherSearch .current-temperature {
+  font-size: 79px;
+}
+
+.WeatherSearch .weather-heading {
+  font-size: 80px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 13px;
+  color: #333333;
+}
+
+.WeatherSearch .weather-subheading {
+  font-size: 26px;
+  text-align: center;
+  font-weight: normal;
+  margin-top: 50px;
+  color: #333333;
+}
+
+.WeatherSearch .unit-buttons button {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-size: 20px;
+}
+
+.WeatherSearch .degree-active {
+  font-weight: bold;
+}
