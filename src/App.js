@@ -2,12 +2,10 @@ import React from "react";
 import WeatherSearch from "./WeatherSearch";
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <WeatherSearch />
+      <WeatherSearch defaultCity="Kyiv" />
     </div>
   );
 }
-
-export default App;

@@ -1,26 +1,30 @@
 import React, { useState } from "react";
+import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
 import "./WeatherSearch.css";
 
-export default function WeatherSearch() {
-  const defaultWeather = {
-    city: "Kyiv",
-    temperature: 30,
-    description: "Sunny",
-    humidity: 42,
-    wind: 3,
-    icon: `http://openweathermap.org/img/wn/01d@2x.png`,
-  };
-  let [city, setCity] = useState("Kyiv");
-  let [weather, setWeather] = useState(defaultWeather);
+export default function WeatherSearch(props) {
+  let [city, setCity] = useState(props.defaultCity);
+  let [weather, setWeather] = useState({
+    isReady: false,
+  });
+
+  function showWeather(response) {
+    setWeather({
+      isReady: true,
+      city: response.data.name,
+      date: new Date(response.data.dt * 1000),
+      temperature: response.data.main.temp,
+      description: response.data.weather[0].description,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+    });
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (city !== "") {
-      getWeather();
-    } else {
-      setWeather();
-    }
+    getWeather();
   }
 
   function updateCity(event) {
@@ -34,67 +38,35 @@ export default function WeatherSearch() {
     axios.get(apiUrl).then(showWeather);
   }
 
-  function showWeather(response) {
-    setWeather({
-      city: response.data.name,
-      temperature: response.data.main.temp,
-      description: response.data.weather[0].description,
-      humidity: response.data.main.humidity,
-      wind: response.data.wind.speed,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-    });
-  }
-
-  return (
-    <div className="WeatherSearch">
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-9">
-            <input
-              type="text"
-              placeholder="Enter a city"
-              className="form-control shadow-sm search-input"
-              autoFocus="on"
-              onChange={updateCity}
-            />
+  if (weather.isReady) {
+    return (
+      <div className="WeatherSearch">
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-9">
+              <input
+                type="text"
+                placeholder="Enter a city"
+                className="form-control shadow-sm search-input"
+                autoFocus="on"
+                onChange={updateCity}
+              />
+            </div>
+            <div className="col-3">
+              <input
+                type="submit"
+                value="Search"
+                className="form-control btn btn-primary shadow-sm submit-button"
+              />
+            </div>
           </div>
-          <div className="col-3">
-            <input
-              type="submit"
-              value="Search"
-              className="form-control btn btn-primary shadow-sm submit-button"
-            />
-          </div>
-        </div>
-      </form>
-      <h1 className="weather-heading">{weather.city}</h1>
-      <h2 className="weather-subheading">Wednesday 12:00</h2>
-
-      <ul>
-        <li>{weather.description}</li>
-        <li>Humidity: {weather.humidity}%</li>
-        <li>Wind: {Math.round(weather.wind)} km/h</li>
-      </ul>
-
-      <div className="row current-weather">
-        <div className="col-4 text-end">
-          <img src={weather.icon} alt={weather.description} />
-        </div>
-
-        <div className="col-4 current-temperature text-end">
-          {Math.round(weather.temperature)}
-        </div>
-
-        <div className="col-4 unit-buttons text-start">
-          <button type="button" className="btn btn-link degree-active">
-            °C
-          </button>
-          <span>|</span>
-          <button type="button" className="btn btn-link">
-            °F
-          </button>
-        </div>
+        </form>
+        <h1 className="weather-heading">{weather.city}</h1>
+        <WeatherInfo weather={weather} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    getWeather();
+    return "Loading...";
+  }
 }
