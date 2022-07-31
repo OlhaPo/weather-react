@@ -1,0 +1,36 @@
+.WeatherForecast .extended-forecast-tittle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
+  margin-top: 70px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.WeatherForecast .extended-forecast .row {
+  border-top: 1px solid #4c8492;
+  line-height: 4.2;
+}
+
+.WeatherForecast .extended-forecast {
+  font-size: 19px;
+}
+
+.WeatherForecast .extended-forecast img {
+  width: 90px;
+  vertical-align: middle;
+}
+
+.WeatherForecast .extended-forecast .column-temp {
+  text-align: right;
+  font-size: 20px;
+  line-height: 4.2;
+}
+
+.WeatherForecast .extended-forecast-temp-max {
+  font-weight: bold;
+}
+
+.WeatherForecast .extended-forecast-temp-min {
+  color: #333333;
+}

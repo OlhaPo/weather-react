@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormattedDate from "./FormattedDate";
+import WeatherIcon from "./WeatherIcon";
 
 export default function WeatherInfo(props) {
   let [unit, setUnit] = useState("celsius");
@@ -32,7 +33,10 @@ export default function WeatherInfo(props) {
 
       <div className="row current-weather">
         <div className="col-4 text-end">
-          <img src={props.weather.icon} alt={props.weather.description} />
+          <WeatherIcon
+            icon={props.weather.icon}
+            alt={props.weather.description}
+          />
         </div>
         <div className="col-4 current-temperature text-end">
           {showTemperature()}
